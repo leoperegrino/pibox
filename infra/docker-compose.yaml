@@ -66,6 +66,7 @@ services:
   pihole:
     image: pihole/pihole:latest
     container_name: pihole
+    dns: 127.0.0.1
     restart: unless-stopped
     cap_add:
       - NET_ADMIN
@@ -75,7 +76,6 @@ services:
       - CORS_HOSTS=${PIHOLE_CORS_HOSTS}
       - WEBTHEME=default-darker
     ports:
-      # ensure rpi's /etc/resolvconf.conf has "name_servers=127.0.0.1"
       - 53:53/tcp
       - 53:53/udp
       # - 67:67/udp  # optional DHCP
