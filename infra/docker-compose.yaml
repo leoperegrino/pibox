@@ -103,7 +103,6 @@ services:
       - LOG_CONFS=true
     volumes:
       - ./config/wireguard:/config
-      - /lib/modules:/lib/modules
     ports:
       - ${WG_SERVERPORT}:51820/udp
     sysctls:
