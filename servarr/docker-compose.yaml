@@ -105,20 +105,11 @@ services:
       - PGID=${PGID}
       - TZ=${TZ}
       - JELLYFIN_PublishedServerUrl=${JELLYFIN_URL} # optional
+      - NVIDIA_VISIBLE_DEVICES=all
     volumes:
       - ./config/jellyfin:/config
       - ./data/tvshows:/data/tvshows
       - ./data/movies:/data/movies
-    devices:
-      - /dev/video10:/dev/video10
-      - /dev/video11:/dev/video11
-      - /dev/video12:/dev/video12
-      - /dev/video13:/dev/video13
-      - /dev/video14:/dev/video14
-      - /dev/video15:/dev/video15
-      - /dev/video16:/dev/video16
-      - /dev/video18:/dev/video18
-      - /dev/video19:/dev/video19
     # ports:
       # - 8096:8096
       # - 8920:8920     # optional https
@@ -126,3 +117,9 @@ services:
       # - 1900:1900/udp # optional dnla
     networks:
       - nginx
+    # runtime: nvidia
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - capabilities: ["gpu"]
