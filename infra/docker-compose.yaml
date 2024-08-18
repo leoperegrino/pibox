@@ -82,9 +82,9 @@ services:
       - WEBPASSWORD=${PIHOLE_PASS}
       - CORS_HOSTS=${PIHOLE_CORS_HOSTS}
       - WEBTHEME=default-darker
-    ports:
-      - 53:53/tcp
-      - 53:53/udp
+    # ports:
+      # - 53:53/tcp
+      # - 53:53/udp
       # - 67:67/udp  # optional DHCP
       # - 8081:80/tcp
     volumes:
