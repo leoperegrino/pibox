@@ -1,6 +1,9 @@
 networks:
   default:
     name: nginx
+    ipam:
+      config:
+        - subnet: ${NGINX_SUBNET}
 
 
 services:
@@ -8,6 +11,7 @@ services:
   watchtower:
     image: containrrr/watchtower
     container_name: watchtower
+    dns: ${PIHOLE_IP}
     restart: unless-stopped
     command: --cleanup --schedule '0 0 4 * * *'
     volumes:
@@ -17,6 +21,7 @@ services:
   homer:
     image: b4bz/homer:latest
     container_name: homer
+    dns: ${PIHOLE_IP}
     restart: unless-stopped
     environment:
       - INIT_ASSETS=1
@@ -29,6 +34,7 @@ services:
     image: lscr.io/linuxserver/swag:latest
     restart: unless-stopped
     container_name: swag
+    dns: ${PIHOLE_IP}
     cap_add:
       - NET_ADMIN
     environment:
@@ -52,6 +58,7 @@ services:
   duckdns:
     image: lscr.io/linuxserver/duckdns:latest
     container_name: duckdns
+    dns: ${PIHOLE_IP}
     restart: unless-stopped
     environment:
       - PUID=${PUID}
@@ -83,10 +90,14 @@ services:
     volumes:
       - ./config/pihole/etc-pihole:/etc/pihole
       - ./config/pihole/etc-dnsmasq.d:/etc/dnsmasq.d
+    networks:
+      default:
+        ipv4_address: ${PIHOLE_IP}
 
   wireguard:
     image: lscr.io/linuxserver/wireguard:latest
     container_name: wireguard
+    dns: ${PIHOLE_IP}
     restart: unless-stopped
     cap_add:
       - NET_ADMIN

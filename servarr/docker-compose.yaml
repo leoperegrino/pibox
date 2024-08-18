@@ -8,6 +8,7 @@ services:
   radarr:
     image: lscr.io/linuxserver/radarr:latest
     container_name: radarr
+    dns: ${PIHOLE_IP}
     restart: unless-stopped
     environment:
       - PUID=${PUID}
@@ -24,6 +25,7 @@ services:
   sonarr:
     image: lscr.io/linuxserver/sonarr:latest
     container_name: sonarr
+    dns: ${PIHOLE_IP}
     restart: unless-stopped
     environment:
       - PUID=${PUID}
@@ -40,6 +42,7 @@ services:
   prowlarr:
     image: lscr.io/linuxserver/prowlarr:latest
     container_name: prowlarr
+    dns: ${PIHOLE_IP}
     restart: unless-stopped
     environment:
       - PUID=${PUID}
@@ -55,6 +58,7 @@ services:
   bazarr:
     image: lscr.io/linuxserver/bazarr:latest
     container_name: bazarr
+    dns: ${PIHOLE_IP}
     restart: unless-stopped
     environment:
       - PUID=${PUID}
@@ -72,6 +76,7 @@ services:
   transmission:
     image: lscr.io/linuxserver/transmission:latest
     container_name: transmission
+    dns: ${PIHOLE_IP}
     restart: unless-stopped
     environment:
       - PUID=${PUID}
@@ -93,6 +98,7 @@ services:
   jellyfin:
     image: lscr.io/linuxserver/jellyfin:latest
     container_name: jellyfin
+    dns: ${PIHOLE_IP}
     restart: unless-stopped
     environment:
       - PUID=${PUID}
