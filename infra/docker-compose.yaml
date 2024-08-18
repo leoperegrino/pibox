@@ -32,9 +32,9 @@ services:
 
   swag:
     image: lscr.io/linuxserver/swag:latest
-    restart: unless-stopped
     container_name: swag
     dns: ${PIHOLE_IP}
+    restart: unless-stopped
     cap_add:
       - NET_ADMIN
     environment:
